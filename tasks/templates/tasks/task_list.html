@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+</head>
+<body>
+<h1>Tasks</h1>
+{% if request.user.is_authenticated %}
+<a href="{% url 'user-logout' %}">Logout</a>
+{% else %}
+    <a href="{% url 'user-login' %}">Login</a>
+    <a href="">Register</a>
+{% endif %}
+<hr>
+<a href="{% url 'task-create' %}">Create</a>
+<table>
+    <tr>
+        <th>Task</th>
+        <th>Created</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for task in tasks %}
+        <tr>
+            <td><a href="{% url 'task-edit' task.id %}">{{ task }}</a></td>
+            <td>{{ task.created }}</td>
+            <td>
+                <a href="{% url 'task-delete' task.id %}">Delete</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
