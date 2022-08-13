@@ -14,6 +14,11 @@
 {% endif %}
 <hr>
 <a href="{% url 'task-create' %}">Create</a>
+<h5>{{ request.user.username }} has {{ count }} incomplete tasks.</h5>
+<form method="GET">
+    <input type="search" name="search_bar" value="{{ search_input }}">
+    <input type="submit" value="Search">
+</form>
 <table>
     <tr>
         <th>Task</th>
@@ -23,7 +28,11 @@
 
     {% for task in tasks %}
         <tr>
-            <td><a href="{% url 'task-edit' task.id %}">{{ task }}</a></td>
+            {% if not task.is_completed %}
+                <td><a href="{% url 'task-edit' task.id %}">{{ task }}</a></td>
+            {% else %}
+                <td><a href="{% url 'task-edit' task.id %}"><s>{{ task }}</s></a></td>
+            {% endif %}
             <td>{{ task.created }}</td>
             <td>
                 <a href="{% url 'task-delete' task.id %}">Delete</a>
