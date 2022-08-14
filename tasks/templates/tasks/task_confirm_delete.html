@@ -1,15 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<a href="{% url 'tasks-view' %}">Go back</a>
-<form action="" method="POST">
-    {% csrf_token %}
-    <p>Are you sure you want to delete this task?</p>
-    <input type="submit" value="Submit">
-</form>
-</body>
-</html>
+{% extends 'tasks/main.html' %}
+{% block card_header %}
+    <h5>Register</h5>
+{% endblock card_header %}
+
+{% block card_body %}
+    <form action="" method="POST" class="mt-1">
+        {% csrf_token %}
+        <p>Are you sure you want to delete this task?</p>
+        <div class="d-grid gap-2 my-1 mx-auto col-5 bg-gradient opacity-75">
+            <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+        </div>
+    </form>
+    <hr>
+    <div class="d-grid col-5 mx-auto">
+        <a class="btn btn-outline-danger btn-sm align-items-center my-1" href="{% url 'tasks-view' %}">Go back</a>
+    </div>
+{% endblock card_body %}
+
+
+{#<a href="{% url 'tasks-view' %}">Go back</a>#}
+{#<form action="" method="POST">#}
+{#    {% csrf_token %}#}
+{#    #}
+{#    <input type="submit" value="Submit">#}
+{#</form>#}
+

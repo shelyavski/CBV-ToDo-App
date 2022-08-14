@@ -1,14 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Register">
-</form>
-</body>
-</html>
+{% extends 'tasks/main.html' %}
+{% block card_header %}
+    <h5>Register</h5>
+{% endblock card_header %}
+
+{% block card_body %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+            <div>
+                <label for="" class="form-label">{{ field.label }}</label>
+                {{ field }}
+            </div>
+
+        {% endfor %}
+        <div class="d-grid gap-2 my-1 mx-auto col-5 bg-gradient opacity-75">
+            <button class="btn btn-success btn-sm" type="submit">Register</button>
+        </div>
+    </form>
+    <hr>
+    <div class="col mx-auto">
+        <a class="align-items-center" href="{% url 'user-login' %}">Already have an account?</a>
+    </div>
+{% endblock card_body %}
+
+
+
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#</head>#}
+{#<body>#}
+{#<form action="" method="POST">#}
+{#    {% csrf_token %}#}
+{#    {{ form.as_p }}#}
+{#    <input type="submit" value="Register">#}
+{#</form>#}
+{#</body>#}
+{#</html>#}
